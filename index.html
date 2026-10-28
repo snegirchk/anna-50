@@ -197,7 +197,7 @@ p{margin:0 0 14px}
 .t-row small{display:block;font:800 11px/1.2 var(--f-body);letter-spacing:.18em;text-transform:uppercase;color:var(--cream-dim);margin-bottom:4px}
 .t-row div{font:700 18px/1.35 var(--f-body)}
 .t-row .big{font:italic 800 24px/1.15 var(--f-display)}
-.t-btns{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.t-btns{display:grid;gap:10px}
 .countdown{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:22px}
 .cd{text-align:center;padding:12px 4px 10px;border-radius:14px;background:rgba(248,236,218,.05);border:1px solid var(--line)}
 .cd b{display:block;font:800 30px/1 var(--f-display);font-variant-numeric:tabular-nums;color:var(--cream)}
@@ -381,7 +381,6 @@ footer .hand{font:400 46px/1.1 var(--f-hand);margin:0 0 6px}
         <div class="t-row"><small>Дресс-код</small><div data-f="dress">Всё, в чём вы чувствуете себя звездой обложки</div></div>
         <div class="t-btns">
           <a class="btn ghost" id="mapBtn" href="#" target="_blank" rel="noopener">Маршрут</a>
-          <a class="btn ghost" id="calBtn" href="#" target="_blank" rel="noopener">В календарь</a>
         </div>
       </div>
     </div>
@@ -495,7 +494,6 @@ const CONFIG = {
   signature: "Ваша Аня",                // подпись под письмом
   date: "2026-11-21T16:00:00+10:00",     // дата и время праздника (+10:00 — время Приморья; для Брянской обл. +03:00)
   timeZone: "Asia/Vladivostok",          // для Брянской обл.: "Europe/Moscow"
-  durationHours: 5,                      // длительность (для календаря)
   place: "Кафе «Ани»",
   address: "г. Фокино, ул. Дальняя, 2",
   mapUrl: "https://yandex.ru/maps/org/ani/162841737823/", // кафе на Яндекс.Картах
@@ -547,31 +545,12 @@ fitMast();
 document.fonts && document.fonts.ready.then(fitMast);
 addEventListener("resize", fitMast);
 
-// --- Карта и календарь
+// --- Карта и телефон
 $("#phoneLink").href = "tel:" + CONFIG.phone.replace(/[^\d+]/g, "");
 $("#mapBtn").href = CONFIG.mapUrl || "https://yandex.ru/maps/?text=" + encodeURIComponent(CONFIG.address);
 $("#mapBtn2").href = $("#mapLink").href = $("#mapBtn").href;
 { const [lon, lat] = CONFIG.mapPoint;
   $("#mapFrame").src = `https://yandex.ru/map-widget/v1/?ll=${lon},${lat}&z=16`; }
-const end = new Date(when.getTime() + CONFIG.durationHours * 3600e3);
-const utc = d => d.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
-const title = `Юбилей: ${CONFIG.name} — 50!`;
-const isApple = /iPhone|iPad|iPod|Macintosh/.test(navigator.userAgent) && "ontouchend" in document;
-if (isApple) {
-  const ics = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//yubiley//RU", "BEGIN:VEVENT",
-    "UID:" + utc(when) + "@yubiley", "DTSTAMP:" + utc(new Date()), "DTSTART:" + utc(when), "DTEND:" + utc(end),
-    "SUMMARY:" + title, "LOCATION:" + CONFIG.place + ", " + CONFIG.address,
-    "BEGIN:VALARM", "TRIGGER:-P1D", "ACTION:DISPLAY", "DESCRIPTION:" + title, "END:VALARM",
-    "END:VEVENT", "END:VCALENDAR"].join("\r\n");
-  const cal = $("#calBtn");
-  cal.href = "data:text/calendar;charset=utf-8," + encodeURIComponent(ics);
-  cal.setAttribute("download", "yubiley.ics");
-  cal.removeAttribute("target");
-} else {
-  $("#calBtn").href = "https://calendar.google.com/calendar/render?action=TEMPLATE" +
-    "&text=" + encodeURIComponent(title) + "&dates=" + utc(when) + "/" + utc(end) +
-    "&location=" + encodeURIComponent(CONFIG.place + ", " + CONFIG.address);
-}
 
 // --- Обратный отсчёт
 const pad = n => String(n).padStart(2, "0");
