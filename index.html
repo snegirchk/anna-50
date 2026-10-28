@@ -37,6 +37,8 @@
   color-scheme:dark;
 }
 *{box-sizing:border-box}
+/* hidden должен побеждать display:grid у блоков (список напитков, поля «если приду») */
+[hidden]{display:none!important}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{
   margin:0;background:var(--ink);color:var(--cream);
