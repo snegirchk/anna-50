@@ -223,6 +223,24 @@ select{
   background-color:rgba(248,236,218,.06);
 }
 select option{background:var(--wine);color:var(--cream)}
+/* Выпадающий список напитков с галочками */
+.dd-btn{
+  display:flex;align-items:center;width:100%;min-height:56px;padding:14px 48px 14px 16px;border-radius:14px;text-align:left;cursor:pointer;
+  font:600 17px/1.3 var(--f-body);color:rgba(205,183,168,.75);border:1.5px solid var(--line);
+  background:rgba(248,236,218,.06) linear-gradient(45deg,transparent 50%,var(--gold-2) 50%) calc(100% - 24px) 50%/6px 6px no-repeat;
+  background-image:linear-gradient(45deg,transparent 50%,var(--gold-2) 50%),linear-gradient(135deg,var(--gold-2) 50%,transparent 50%);
+  background-position:calc(100% - 24px) 50%,calc(100% - 18px) 50%;background-size:6px 6px,6px 6px;background-repeat:no-repeat;
+}
+.dd-btn.filled{color:var(--cream)}
+.dd-btn[aria-expanded="true"]{border-color:var(--rose);background-color:rgba(255,111,151,.08)}
+.dd-list{display:grid;gap:4px;padding:8px;border-radius:16px;border:1.5px solid var(--line);background:var(--wine)}
+.opt{position:relative;display:flex;align-items:center;gap:14px;min-height:52px;padding:10px 12px;border-radius:12px;cursor:pointer;font:700 17px/1.25 var(--f-body)}
+.opt input{position:absolute;opacity:0;width:1px;height:1px}
+.opt span::before{content:"";display:inline-block;vertical-align:-5px;width:22px;height:22px;margin-right:14px;border-radius:6px;border:2px solid var(--cream-dim);transition:all .15s}
+.opt input:checked + span::before{border-color:var(--gold-2);background:var(--gold-2) url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27%3E%3Cpath d=%27M5 12.5l4.5 4.5L19 7.5%27 fill=%27none%27 stroke=%27%231E0816%27 stroke-width=%273.2%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27/%3E%3C/svg%3E") center/16px no-repeat}
+.opt:has(input:checked){background:rgba(216,174,92,.14)}
+.opt input:focus-visible + span{outline:2px solid var(--rose);outline-offset:4px;border-radius:4px}
+.dd-done{margin-top:6px;min-height:50px;border:0;border-radius:999px;cursor:pointer;font:800 14px/1 var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--ink);background:var(--gold);background-size:200% 100%}
 .choices{display:grid;gap:10px;margin-top:8px}
 .choice{position:relative}
 .choice input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer}
@@ -406,18 +424,20 @@ footer .hand{font:400 46px/1.1 var(--f-hand);margin:0 0 6px}
         </div>
 
         <div class="field">
-          <label for="drink">Что будете пить?</label>
-          <select id="drink" name="drink">
-            <option value="" selected disabled>Выберите из списка</option>
-            <option>Водка</option>
-            <option>Виски</option>
-            <option>Белое вино</option>
-            <option>Красное вино</option>
-            <option>Шампанское</option>
-            <option>Настойка</option>
-            <option>Не пью алкоголь</option>
-            <option value="other">Другое (напишу сам)</option>
-          </select>
+          <span class="legend" id="drinkLabel">Что будете пить?</span>
+          <p class="hint">Можно выбрать несколько</p>
+          <button type="button" class="dd-btn" id="drink" aria-expanded="false" aria-controls="drinkList"><span id="drinkSummary">Выберите из списка</span></button>
+          <div class="dd-list" id="drinkList" role="group" aria-labelledby="drinkLabel" hidden>
+            <label class="opt"><input type="checkbox" name="drink" value="Водка"><span>Водка</span></label>
+            <label class="opt"><input type="checkbox" name="drink" value="Виски"><span>Виски</span></label>
+            <label class="opt"><input type="checkbox" name="drink" value="Белое вино"><span>Белое вино</span></label>
+            <label class="opt"><input type="checkbox" name="drink" value="Красное вино"><span>Красное вино</span></label>
+            <label class="opt"><input type="checkbox" name="drink" value="Шампанское"><span>Шампанское</span></label>
+            <label class="opt"><input type="checkbox" name="drink" value="Настойка"><span>Настойка</span></label>
+            <label class="opt"><input type="checkbox" name="drink" value="Не пью алкоголь" data-solo><span>Не пью алкоголь</span></label>
+            <label class="opt"><input type="checkbox" name="drink" value="other" id="drinkOtherCb"><span>Другое (напишу сам)</span></label>
+            <button type="button" class="dd-done" id="drinkDone">Готово</button>
+          </div>
           <input type="text" id="drinkOther" name="drinkOther" placeholder="Напишите, что предпочитаете" maxlength="80" hidden>
         </div>
       </div>
@@ -575,20 +595,45 @@ if ("IntersectionObserver" in window && !reduce) {
 
 // --- Анкета
 const form = $("#form"), onlyYes = $("#onlyYes"), drink = $("#drink"), other = $("#drinkOther");
+const drinkList = $("#drinkList"), otherCb = $("#drinkOtherCb");
+const drinkBoxes = $$("[name=drink]", drinkList);
 const err = $("#err"), out = $("#guests");
 let guests = 1;
 const att = () => (form.querySelector("[name=attending]:checked") || {}).value;
+const pickedDrinks = () => drinkBoxes.filter(b => b.checked);
+
+// Выпадающий список напитков с несколькими вариантами
+function openDrinks(open) {
+  drinkList.hidden = !open;
+  drink.setAttribute("aria-expanded", open);
+  if (open) drinkList.classList.add("reveal-other");
+}
+function drawDrinks() {
+  const names = pickedDrinks().map(b => b.value === "other" ? "Другое" : b.value);
+  $("#drinkSummary").textContent = names.length ? names.join(", ") : "Выберите из списка";
+  drink.classList.toggle("filled", names.length > 0);
+  other.hidden = !otherCb.checked;
+}
+drink.onclick = () => openDrinks(drinkList.hidden);
+$("#drinkDone").onclick = () => { openDrinks(false); (otherCb.checked && !other.value ? other : drink).focus(); };
+document.addEventListener("click", e => {
+  if (!drinkList.hidden && !drinkList.contains(e.target) && !drink.contains(e.target)) openDrinks(false);
+});
 
 form.addEventListener("change", e => {
   if (e.target.name === "attending") onlyYes.hidden = att() !== "yes";
-  if (e.target === drink) {
-    other.hidden = drink.value !== "other";
-    if (!other.hidden) { other.classList.add("reveal-other"); other.focus(); }
+  if (e.target.name === "drink") {
+    // «Не пью алкоголь» не сочетается с остальными вариантами
+    if (e.target.checked) drinkBoxes.forEach(b => {
+      if (b !== e.target && ("solo" in e.target.dataset || "solo" in b.dataset)) b.checked = false;
+    });
+    drawDrinks();
+    if (e.target === otherCb && otherCb.checked) other.classList.add("reveal-other");
   }
   err.hidden = true;
 });
 // браузер может восстановить ответы после перезагрузки: показываем нужные поля
-function syncForm() { onlyYes.hidden = att() !== "yes"; other.hidden = drink.value !== "other"; }
+function syncForm() { onlyYes.hidden = att() !== "yes"; drawDrinks(); }
 syncForm(); addEventListener("pageshow", syncForm);
 $("#minus").onclick = () => { guests = Math.max(1, guests - 1); out.textContent = guests; };
 $("#plus").onclick = () => { guests = Math.min(10, guests + 1); out.textContent = guests; };
@@ -602,13 +647,16 @@ form.addEventListener("submit", async e => {
   if (!att()) return fail("Отметьте, придёте ли вы.", $("#att-yes"));
   let drinkVal = "";
   if (att() === "yes") {
-    drinkVal = drink.value === "other" ? other.value.trim() : drink.value;
-    if (!drink.value) return fail("Выберите напиток из списка.", drink);
-    if (drink.value === "other" && !drinkVal) return fail("Напишите, что вы предпочитаете.", other);
+    const picked = pickedDrinks();
+    if (!picked.length) return fail("Выберите хотя бы один напиток из списка.", drink);
+    if (otherCb.checked && !other.value.trim()) return fail("Напишите, что вы предпочитаете.", other);
+    // «Другое» всегда последним: таблица отделяет его по метке «Другое: »
+    drinkVal = picked.filter(b => b !== otherCb).map(b => b.value)
+      .concat(otherCb.checked ? ["Другое: " + other.value.trim()] : []).join(", ");
   }
   const data = {
     name, attending: att(), guests: att() === "yes" ? guests : 0,
-    drink: drinkVal, drinkOther: drink.value === "other" ? "да" : "",
+    drink: drinkVal,
     comment: $("#comment").value.trim(), website: $("#website").value
   };
   const btn = $("#submit");
@@ -642,7 +690,7 @@ function showThanks(d) {
   $("#rsvp").scrollIntoView({ behavior: reduce ? "auto" : "smooth" });
 }
 $("#again").onclick = () => {
-  form.reset(); guests = 1; out.textContent = 1; onlyYes.hidden = true; other.hidden = true;
+  form.reset(); guests = 1; out.textContent = 1; onlyYes.hidden = true; openDrinks(false); drawDrinks();
   $("#thanks").hidden = true; form.hidden = false; $("#name").focus();
 };
 
