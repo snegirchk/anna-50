@@ -1,0 +1,675 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Юбилейный выпуск № 50</title>
+<meta name="description" content="Приглашаю вас на мой юбилей! Подробности и анкета внутри.">
+<!-- Превью ссылки в WhatsApp / Telegram. og:image лучше указать полным адресом после публикации -->
+<meta property="og:title" content="Юбилейный выпуск № 50 — приглашение">
+<meta property="og:description" content="Приглашаю вас на мой юбилей! Подробности и анкета внутри.">
+<meta property="og:image" content="https://snegirchk.github.io/anna-50/photos/cover.jpg">
+<meta property="og:url" content="https://snegirchk.github.io/anna-50/">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#1E0816">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Marck+Script&family=Playfair+Display:ital,wght@0,400;0,600;0,800;0,900;1,400;1,600;1,800;1,900&display=swap">
+<style>
+/* Концепция: мама — звезда обложки юбилейного журнала, главный редактор — дочь.
+   Обложка → слово редактора → архив выпусков (фото по годам) → главное событие номера → анкета читателя. */
+:root{
+  --ink:#1E0816;          /* фон: винно-чёрный */
+  --wine:#3A0E28;         /* поверхности */
+  --wine-2:#5A1840;
+  --cream:#F8ECDA;        /* основной текст */
+  --cream-dim:#CDB7A8;    /* второстепенный текст */
+  --rose:#FF6F97;         /* акцент */
+  --blush:#F6C6D3;
+  --gold-1:#B4843A; --gold-2:#F7E1A3; --gold-3:#D8AE5C;
+  --gold:linear-gradient(100deg,var(--gold-1) 0%,var(--gold-2) 30%,var(--gold-3) 50%,var(--gold-2) 70%,var(--gold-1) 100%);
+  --line:rgba(247,225,163,.28);
+  --f-display:"Playfair Display","Didot","Bodoni 72",Georgia,serif;
+  --f-body:"Manrope",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --f-hand:"Marck Script","Segoe Script","Snell Roundhand",cursive;
+  --gut:max(18px, env(safe-area-inset-left,0px));
+  --gut-r:max(18px, env(safe-area-inset-right,0px));
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--ink);color:var(--cream);
+  font:500 17px/1.6 var(--f-body);
+  background-image:
+    radial-gradient(120% 60% at 50% -10%, rgba(255,111,151,.18), transparent 60%),
+    radial-gradient(90% 50% at 100% 60%, rgba(216,174,92,.10), transparent 60%);
+  background-attachment:fixed;
+  overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+.page{max-width:480px;margin:0 auto;padding-left:var(--gut);padding-right:var(--gut-r);padding-bottom:max(24px,env(safe-area-inset-bottom,0px))}
+.gold-text{background:var(--gold);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent}
+:focus-visible{outline:2px solid var(--rose);outline-offset:3px;border-radius:6px}
+
+/* ---------- ОБЛОЖКА ---------- */
+.cover{padding-top:max(14px,env(safe-area-inset-top,0px));position:relative}
+.cover-top{
+  display:flex;justify-content:space-between;gap:8px;
+  font:700 11px/1 var(--f-body);letter-spacing:.18em;text-transform:uppercase;color:var(--cream-dim);
+  padding-block:6px 10px;border-bottom:1px solid var(--line);
+}
+.cover-top b{color:var(--rose);font-weight:800}
+.mast{
+  position:relative;z-index:3;margin:6px 0 0;
+  font:900 120px/.82 var(--f-display);letter-spacing:-.02em;text-transform:uppercase;
+  color:var(--cream);white-space:nowrap;text-align:center;
+  text-shadow:0 6px 30px rgba(30,8,22,.55);
+}
+.mast .ch{display:inline-block;animation:rise .9s cubic-bezier(.2,.8,.2,1) both}
+@keyframes rise{from{transform:translateY(60%) rotate(4deg);opacity:0}to{transform:none;opacity:1}}
+
+.cover-photo{
+  position:relative;margin:-.34em 0 0;font-size:120px; /* font-size подгоняется вместе с шапкой */
+  aspect-ratio:4/5;max-width:100%;border-radius:2px;overflow:hidden;
+  background:var(--wine);
+  animation:unveil 1.4s .25s cubic-bezier(.7,0,.2,1) both;
+}
+@keyframes unveil{from{clip-path:inset(0 0 100% 0)}to{clip-path:inset(0 0 0 0)}}
+.cover-photo img{width:100%;height:100%;object-fit:cover;animation:kenburns 14s ease-in-out infinite alternate}
+@keyframes kenburns{from{transform:scale(1.02)}to{transform:scale(1.10) translateY(-2%)}}
+.cover-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(30,8,22,.25) 0%,transparent 25%,transparent 45%,rgba(30,8,22,.92) 100%);pointer-events:none}
+
+.ph{display:none}
+.empty > img{display:none}
+.empty > .ph{
+  display:grid;place-items:center;text-align:center;position:absolute;inset:0;
+  background:
+    radial-gradient(60% 45% at 50% 38%, rgba(246,198,211,.35), transparent 70%),
+    repeating-linear-gradient(135deg, rgba(247,225,163,.06) 0 2px, transparent 2px 14px),
+    linear-gradient(160deg,var(--wine-2),var(--wine));
+  color:var(--blush);font:600 14px/1.4 var(--f-body);letter-spacing:.04em;padding:16px;
+}
+.ph small{display:block;opacity:.7;font-weight:500;margin-top:4px}
+
+.big50{
+  /* line-height и отступы с запасом: золото рисуется только внутри блока, иначе края цифр срезаются */
+  position:absolute;z-index:2;left:0;bottom:.02em;padding:0 .14em 0 .06em;
+  font:italic 900 1.5em/1.12 var(--f-display);letter-spacing:-.04em;
+  animation:shimmer 5s linear infinite, pop 1s 1.1s cubic-bezier(.3,1.6,.5,1) both;
+  filter:drop-shadow(0 4px 18px rgba(0,0,0,.45));
+}
+@keyframes shimmer{from{background-position:0% 0}to{background-position:-200% 0}}
+@keyframes pop{from{transform:scale(.4) rotate(-12deg);opacity:0}to{transform:none;opacity:1}}
+
+.lines{
+  position:absolute;z-index:2;right:14px;bottom:16px;width:47%;margin:0;padding:0;list-style:none;
+  display:grid;gap:10px;text-align:right;
+}
+.lines li{font:600 12.5px/1.3 var(--f-body);color:var(--cream);text-shadow:0 1px 8px rgba(0,0,0,.6);animation:slidein .8s both}
+.lines li:nth-child(1){animation-delay:1.3s}
+.lines li:nth-child(2){animation-delay:1.5s}
+.lines li:nth-child(3){animation-delay:1.7s}
+.lines em{display:block;font:italic 800 19px/1.05 var(--f-display);color:var(--blush)}
+.lines .tag{display:inline-block;background:var(--rose);color:var(--ink);font:800 10px/1 var(--f-body);letter-spacing:.14em;text-transform:uppercase;padding:5px 7px;margin-bottom:4px}
+@keyframes slidein{from{transform:translateX(30px);opacity:0}to{transform:none;opacity:1}}
+
+.cover-foot{display:flex;align-items:center;justify-content:space-between;gap:14px;padding-block:14px 0}
+.barcode{
+  flex:none;width:96px;height:40px;background:#fff;padding:4px 6px 2px;display:grid;grid-template-rows:1fr auto;
+}
+.barcode i{background:repeating-linear-gradient(90deg,#111 0 2px,transparent 2px 3px,#111 3px 4px,transparent 4px 7px,#111 7px 10px,transparent 10px 11px,#111 11px 12px,transparent 12px 15px)}
+.barcode span{font:700 8px/1.2 ui-monospace,Menlo,monospace;color:#111;text-align:center;letter-spacing:.12em}
+.cover-date{font:italic 600 15px/1.35 var(--f-display);color:var(--cream-dim)}
+.cover-date b{display:block;font:800 13px/1.2 var(--f-body);font-style:normal;letter-spacing:.14em;text-transform:uppercase;color:var(--cream)}
+
+.btn{
+  display:flex;align-items:center;justify-content:center;gap:10px;width:100%;
+  min-height:58px;padding:14px 22px;border:0;border-radius:999px;cursor:pointer;text-decoration:none;
+  font:800 16px/1.2 var(--f-body);letter-spacing:.06em;text-transform:uppercase;color:var(--ink);
+  background:var(--gold);background-size:200% 100%;animation:shimmer 6s linear infinite;
+  box-shadow:0 10px 30px -10px rgba(216,174,92,.7);
+  transition:transform .15s;
+}
+.btn:active{transform:scale(.97)}
+.btn.ghost{background:transparent;color:var(--cream);border:1.5px solid var(--line);box-shadow:none;animation:none;font-size:13px;letter-spacing:.04em;padding-inline:12px;white-space:nowrap;min-height:50px}
+.cta{margin-top:18px}
+
+/* ---------- РАЗДЕЛЫ ---------- */
+section{padding-block:64px 0}
+.rubric{display:flex;align-items:center;gap:12px;font:800 11px/1 var(--f-body);letter-spacing:.22em;text-transform:uppercase;color:var(--rose);margin:0 0 14px}
+.rubric::after{content:"";flex:1;height:1px;background:var(--line)}
+h2{font:italic 800 40px/1.02 var(--f-display);margin:0 0 18px;text-wrap:balance;letter-spacing:-.01em}
+p{margin:0 0 14px}
+.lead{font-size:18px;color:var(--cream)}
+.muted{color:var(--cream-dim)}
+
+/* Слово редактора */
+.editor{display:grid;gap:4px}
+.editor .drop::first-letter{float:left;font:900 64px/.8 var(--f-display);margin:6px 10px 0 0;color:var(--rose)}
+.sign{display:flex;align-items:center;gap:14px;margin-top:10px}
+.sign .ava{width:64px;height:64px;border-radius:50%;overflow:hidden;position:relative;flex:none;border:2px solid var(--gold-3)}
+.sign .ava img{width:100%;height:100%;object-fit:cover}
+.sign .ava .ph{font-size:10px;padding:4px}
+.sign .hand{font:400 38px/1 var(--f-hand)}
+.sign small{display:block;font:700 11px/1.3 var(--f-body);letter-spacing:.16em;text-transform:uppercase;color:var(--cream-dim)}
+
+/* Архив выпусков */
+.archive{
+  display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;
+  margin-inline:calc(-1 * var(--gut)) calc(-1 * var(--gut-r));padding:8px var(--gut-r) 18px var(--gut);
+  scrollbar-width:none;
+}
+.archive::-webkit-scrollbar{display:none}
+.issue{flex:0 0 68%;scroll-snap-align:center;margin:0}
+.mini{
+  position:relative;aspect-ratio:3/4;overflow:hidden;background:var(--wine);
+  box-shadow:0 18px 40px -16px rgba(0,0,0,.8);transform:rotate(var(--r,0deg));transition:transform .4s;
+}
+.issue:nth-child(odd) .mini{--r:-1.5deg}
+.issue:nth-child(even) .mini{--r:1.5deg}
+.mini img{width:100%;height:100%;object-fit:cover;filter:sepia(var(--sep,0)) contrast(1.05)}
+.mini::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(30,8,22,.55),transparent 30%,transparent 65%,rgba(30,8,22,.8));pointer-events:none}
+.mini .mm{position:absolute;z-index:2;top:8px;left:0;right:0;text-align:center;font:900 30px/1 var(--f-display);text-transform:uppercase;letter-spacing:-.01em;color:var(--cream)}
+.mini .no{position:absolute;z-index:2;left:10px;bottom:8px;font:italic 900 42px/1 var(--f-display)}
+.issue figcaption{padding-top:14px;font-size:15px;line-height:1.45;color:var(--cream-dim)}
+.issue figcaption b{display:block;font:800 12px/1.3 var(--f-body);letter-spacing:.16em;text-transform:uppercase;color:var(--cream);margin-bottom:2px}
+.swipe-hint{font:700 12px/1 var(--f-body);letter-spacing:.14em;text-transform:uppercase;color:var(--cream-dim);display:flex;align-items:center;gap:8px}
+.swipe-hint span{display:inline-block;animation:nudge 1.6s ease-in-out infinite}
+@keyframes nudge{50%{transform:translateX(6px)}}
+
+/* Главное событие — билет */
+.ticket{
+  position:relative;border-radius:22px;overflow:hidden;
+  background:linear-gradient(165deg,var(--wine-2),var(--wine) 60%);
+  border:1px solid var(--line);
+}
+.t-head{padding:24px 22px 20px;display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:end}
+.t-day{font:italic 900 104px/.8 var(--f-display);letter-spacing:-.04em;animation:shimmer 5s linear infinite}
+.t-when b{display:block;font:italic 800 28px/1.05 var(--f-display);color:var(--cream)}
+.t-when > span{display:block;font:700 14px/1.4 var(--f-body);letter-spacing:.12em;text-transform:uppercase;color:var(--blush);margin-top:6px}
+.t-cut{position:relative;height:0;border-top:2px dashed var(--line);margin:0 22px}
+.t-cut::before,.t-cut::after{content:"";position:absolute;top:-14px;width:26px;height:26px;border-radius:50%;background:var(--ink)}
+.t-cut::before{left:-36px}.t-cut::after{right:-36px}
+.t-body{padding:20px 22px 22px;display:grid;gap:16px}
+.t-row small{display:block;font:800 11px/1.2 var(--f-body);letter-spacing:.18em;text-transform:uppercase;color:var(--cream-dim);margin-bottom:4px}
+.t-row div{font:700 18px/1.35 var(--f-body)}
+.t-row .big{font:italic 800 24px/1.15 var(--f-display)}
+.t-btns{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.countdown{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:22px}
+.cd{text-align:center;padding:12px 4px 10px;border-radius:14px;background:rgba(248,236,218,.05);border:1px solid var(--line)}
+.cd b{display:block;font:800 30px/1 var(--f-display);font-variant-numeric:tabular-nums;color:var(--cream)}
+.cd span{font:700 10px/1 var(--f-body);letter-spacing:.14em;text-transform:uppercase;color:var(--cream-dim)}
+.cd-label{margin-top:22px;margin-bottom:0;font:700 12px/1 var(--f-body);letter-spacing:.18em;text-transform:uppercase;color:var(--cream-dim);text-align:center}
+
+/* Анкета */
+form{display:grid;gap:22px;margin-top:6px}
+.field{display:grid;gap:8px}
+.field > label,.legend{font:800 13px/1.3 var(--f-body);letter-spacing:.12em;text-transform:uppercase;color:var(--cream)}
+fieldset{border:0;margin:0;padding:0;min-width:0}
+input[type=text],select,textarea{
+  width:100%;min-height:56px;padding:14px 16px;border-radius:14px;
+  font:600 17px/1.3 var(--f-body);color:var(--cream);
+  background:rgba(248,236,218,.06);border:1.5px solid var(--line);
+  -webkit-appearance:none;appearance:none;transition:border-color .2s, background .2s;
+}
+input::placeholder,textarea::placeholder{color:rgba(205,183,168,.6)}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--rose);background:rgba(255,111,151,.08)}
+textarea{min-height:96px;resize:vertical}
+select{
+  padding-right:48px;cursor:pointer;
+  background-image:linear-gradient(45deg,transparent 50%,var(--gold-2) 50%),linear-gradient(135deg,var(--gold-2) 50%,transparent 50%);
+  background-position:calc(100% - 24px) 50%,calc(100% - 18px) 50%;background-size:6px 6px,6px 6px;background-repeat:no-repeat;
+  background-color:rgba(248,236,218,.06);
+}
+select option{background:var(--wine);color:var(--cream)}
+.choices{display:grid;gap:10px;margin-top:8px}
+.choice{position:relative}
+.choice input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer}
+.choice span{
+  display:flex;align-items:center;gap:14px;min-height:60px;padding:14px 18px;border-radius:16px;
+  border:1.5px solid var(--line);background:rgba(248,236,218,.04);font:700 17px/1.25 var(--f-body);
+  transition:all .2s;
+}
+.choice span::before{content:"";flex:none;width:22px;height:22px;border-radius:50%;border:2px solid var(--cream-dim);transition:all .2s}
+.choice input:checked + span{border-color:var(--gold-3);background:rgba(216,174,92,.14)}
+.choice input:checked + span::before{border-color:var(--gold-2);background:radial-gradient(circle,var(--gold-2) 45%,transparent 50%)}
+.choice input:focus-visible + span{outline:2px solid var(--rose);outline-offset:2px}
+.stepper{display:flex;align-items:center;gap:6px;width:max-content;border:1.5px solid var(--line);border-radius:999px;padding:4px}
+.stepper button{width:48px;height:48px;border-radius:50%;border:0;background:rgba(248,236,218,.08);color:var(--cream);font:700 24px/1 var(--f-body);cursor:pointer}
+.stepper output{min-width:56px;text-align:center;font:800 24px/1 var(--f-display);font-variant-numeric:tabular-nums}
+.only-yes{display:grid;gap:22px}
+.hint{font-size:14px;color:var(--cream-dim);margin:0}
+.err{color:var(--rose);font-size:14px;font-weight:700;margin:0}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.reveal-other{animation:fadeDown .35s both}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+
+.thanks{text-align:center;padding:34px 20px;border-radius:22px;border:1px solid var(--line);background:linear-gradient(165deg,var(--wine-2),var(--wine));animation:fadeDown .5s both}
+.thanks h3{font:italic 800 34px/1.1 var(--f-display);margin:0 0 12px}
+.thanks .hand{font:400 40px/1 var(--f-hand);margin:16px 0 22px}
+
+/* Подвал */
+footer{padding-block:72px 24px;text-align:center}
+footer .hand{font:400 46px/1.1 var(--f-hand);margin:0 0 6px}
+.imprint{margin-top:34px;padding-top:16px;border-top:1px solid var(--line);font:600 12px/1.7 var(--f-body);letter-spacing:.06em;color:var(--cream-dim)}
+.imprint b{color:var(--cream)}
+
+/* Появление при прокрутке */
+.js .rv{transition:opacity .9s ease, transform .9s cubic-bezier(.2,.8,.2,1)}
+.js .rv.wait{opacity:0;transform:translateY(28px)}
+
+.map-frame{position:relative;display:block;aspect-ratio:16/9;max-width:100%;border-radius:18px;overflow:hidden;border:1px solid var(--line);background:var(--wine);margin-top:4px}
+.map-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;pointer-events:none;filter:grayscale(1) contrast(1.05) brightness(.97)}
+/* своя метка: карта неподвижна, поэтому центр карты = кафе */
+.map-pin{position:absolute;left:50%;top:50%;width:30px;height:30px;margin:-30px 0 0 -15px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:var(--rose);border:3px solid var(--cream);box-shadow:0 6px 14px rgba(0,0,0,.45);animation:bounce 2s ease-in-out infinite}
+.map-pin::after{content:"";position:absolute;inset:7px;border-radius:50%;background:var(--cream)}
+@keyframes bounce{50%{translate:0 -6px}}
+#confetti{position:fixed;inset:0;pointer-events:none;z-index:50}
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .js .rv.wait{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+<canvas id="confetti" aria-hidden="true"></canvas>
+<div class="page">
+
+  <!-- ===== ОБЛОЖКА ===== -->
+  <header class="cover">
+    <div class="cover-top"><span>Юбилейный выпуск</span><b>№ 50</b><span data-f="monthYear">ноябрь 2026</span></div>
+    <h1 class="mast" id="mast" data-f="name">Анна</h1>
+    <figure class="cover-photo" id="coverPhoto">
+      <img src="photos/cover.jpg" alt="Фото на обложке" onerror="this.parentNode.classList.add('empty')">
+      <div class="ph">Здесь будет фото на обложку<small>photos/cover.jpg</small></div>
+      <div class="big50 gold-text">50</div>
+      <ul class="lines">
+        <li><span class="tag">Эксклюзив</span><em>Полвека — и ни дня скуки</em></li>
+        <li>Как оставаться звездой и не терять чувство юмора</li>
+        <li>Приглашение, от которого нельзя отказаться →</li>
+      </ul>
+    </figure>
+    <div class="cover-foot">
+      <div class="cover-date"><b><span data-f="day">21</span> <span data-f="month">ноября</span> · <span data-f="time">16:00</span></b>Все подробности внутри номера</div>
+      <div class="barcode" aria-hidden="true"><i></i><span data-f="dateShort">21·11·2026</span></div>
+    </div>
+    <a class="btn cta" href="#rsvp">Ответить на приглашение</a>
+  </header>
+
+  <!-- ===== СЛОВО РЕДАКТОРА ===== -->
+  <section class="editor rv" id="letter">
+    <p class="rubric">Слово героини номера</p>
+    <h2>Дорогие мои!</h2>
+    <p class="lead drop">Мне исполняется 50, и я решила, что это лучший повод собрать вместе самых любимых людей. Тех, кто был рядом в разные годы, смеялся со мной, поддерживал и просто делал мою жизнь ярче.</p>
+    <p>Приглашаю вас на мой юбилей! Будет вкусно, весело и немного торжественно. Будут танцы, тосты и, конечно, много объятий. Без вас этот номер просто не выйдет.</p>
+    <p>Пожалуйста, заполните короткую анкету внизу страницы, чтобы я знала, кого ждать и чем вас угощать.</p>
+    <div class="sign">
+      <div class="ava"><img src="photos/avatar.jpg" alt="Анна" style="object-position:50% 42%" onerror="this.parentNode.classList.add('empty')"><div class="ph">фото</div></div>
+      <div><div class="hand gold-text" data-f="signature">Ваша Аня</div><small>героиня номера и именинница</small></div>
+    </div>
+  </section>
+
+  <!-- ===== АРХИВ ВЫПУСКОВ ===== -->
+  <section class="rv" id="archive">
+    <p class="rubric">Архив выпусков</p>
+    <h2>Полвека в&nbsp;кадре</h2>
+    <p class="swipe-hint">Листайте <span>→</span></p>
+    <div class="archive">
+      <!-- Номер выпуска = возраст. Фото лежат в папке photos/ -->
+      <figure class="issue">
+        <div class="mini"><img src="photos/baby.jpg" alt="Аня-малышка с большим бантом" style="object-position:50% 40%" loading="lazy"><div class="mm" data-f="name">Анна</div><div class="no gold-text">№1</div></div>
+        <figcaption><b>Выпуск № 1 · 1970-е</b>Дебютный номер. Тираж: один экземпляр. Бант больше головы, так и задумано.</figcaption>
+      </figure>
+      <figure class="issue">
+        <div class="mini"><img src="photos/school.jpg" alt="Школьная фотография класса" style="object-position:50% 45%" loading="lazy"><div class="mm" data-f="name">Анна</div><div class="no gold-text">№14</div></div>
+        <figcaption><b>Выпуск № 14 · 80-е</b>Школьная пора. Найдите героиню номера: подсказка — самая серьёзная в центре.</figcaption>
+      </figure>
+      <figure class="issue">
+        <div class="mini"><img src="photos/90s.jpg" alt="С подругой, 90-е" style="object-position:50% 40%" loading="lazy"><div class="mm" data-f="name">Анна</div><div class="no gold-text">№18</div></div>
+        <figcaption><b>Выпуск № 18 · 90-е</b>Белоснежный пиджак с плечиками и фирменная чёлка. Мода, которая снова в моде.</figcaption>
+      </figure>
+      <figure class="issue">
+        <div class="mini"><img src="photos/pink.jpg" alt="В розовом платье с букетом" style="object-position:50% 30%" loading="lazy"><div class="mm" data-f="name">Анна</div><div class="no gold-text">№25</div></div>
+        <figcaption><b>Выпуск № 25 · 2000-е</b>Праздничный спецвыпуск: розы в причёске, букет в руках и мечтательный взгляд.</figcaption>
+      </figure>
+      <figure class="issue">
+        <div class="mini"><img src="photos/2000s.jpg" alt="В путешествии рядом со статуей" style="object-position:50% 50%" loading="lazy"><div class="mm" data-f="name">Анна</div><div class="no gold-text">№30</div></div>
+        <figcaption><b>Выпуск № 30 · 2000-е</b>Рубрика «Путешествия». Талисман на удачу рядом, улыбка — по настроению.</figcaption>
+      </figure>
+      <figure class="issue">
+        <div class="mini"><img src="photos/now.jpg" alt="Анна сегодня" style="object-position:50% 50%" loading="lazy"><div class="mm" data-f="name">Анна</div><div class="no gold-text">№50</div></div>
+        <figcaption><b>Выпуск № 50 · 2026</b>Коллекционное издание. Лучший номер, и вы в нём есть.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ===== ГЛАВНОЕ СОБЫТИЕ ===== -->
+  <section class="rv" id="event">
+    <p class="rubric">Главное событие номера</p>
+    <h2>Когда и&nbsp;где</h2>
+    <div class="ticket">
+      <div class="t-head">
+        <div class="t-day gold-text" data-f="day">21</div>
+        <div class="t-when"><b data-f="month">ноября</b><span><span data-f="weekday">суббота</span> · <span data-f="time">16:00</span></span></div>
+      </div>
+      <div class="t-cut"></div>
+      <div class="t-body">
+        <div class="t-row"><small>Место</small><div class="big" data-f="place">Кафе «Ани»</div></div>
+        <div class="t-row"><small>Адрес</small><div data-f="address">г. Фокино, ул. Дальняя, 2</div></div>
+        <div class="t-row"><small>Дресс-код</small><div data-f="dress">Всё, в чём вы чувствуете себя звездой обложки</div></div>
+        <div class="t-btns">
+          <a class="btn ghost" id="mapBtn" href="#" target="_blank" rel="noopener">Маршрут</a>
+          <a class="btn ghost" id="calBtn" href="#" target="_blank" rel="noopener">В календарь</a>
+        </div>
+      </div>
+    </div>
+    <p class="cd-label" id="cdLabel">До выхода номера</p>
+    <div class="countdown" id="countdown" aria-live="off">
+      <div class="cd"><b id="cdD">00</b><span>дней</span></div>
+      <div class="cd"><b id="cdH">00</b><span>часов</span></div>
+      <div class="cd"><b id="cdM">00</b><span>минут</span></div>
+      <div class="cd"><b id="cdS">00</b><span>секунд</span></div>
+    </div>
+  </section>
+
+  <!-- ===== АНКЕТА ===== -->
+  <section class="rv" id="rsvp">
+    <p class="rubric">Анкета читателя</p>
+    <h2>Вы со&nbsp;мной?</h2>
+    <p class="muted">Ответьте, пожалуйста: мне важно знать, на сколько персон накрывать стол.</p>
+
+    <form id="form" novalidate>
+      <div class="field">
+        <label for="name">Ваше имя</label>
+        <input type="text" id="name" name="name" autocomplete="name" placeholder="Например, Ольга Петрова" maxlength="80" required>
+      </div>
+
+      <fieldset class="field">
+        <legend class="legend">Придёте?</legend>
+        <div class="choices">
+          <label class="choice"><input type="radio" name="attending" value="yes" id="att-yes"><span>Конечно, буду!</span></label>
+          <label class="choice"><input type="radio" name="attending" value="no" id="att-no"><span>К сожалению, не смогу</span></label>
+        </div>
+      </fieldset>
+
+      <div class="only-yes" id="onlyYes" hidden>
+        <div class="field">
+          <span class="legend" id="guestsLabel">Сколько вас будет</span>
+          <div class="stepper" role="group" aria-labelledby="guestsLabel">
+            <button type="button" id="minus" aria-label="Меньше">−</button>
+            <output id="guests" aria-live="polite">1</output>
+            <button type="button" id="plus" aria-label="Больше">+</button>
+          </div>
+          <p class="hint">Считая вас</p>
+        </div>
+
+        <div class="field">
+          <label for="drink">Что будете пить?</label>
+          <select id="drink" name="drink">
+            <option value="" selected disabled>Выберите из списка</option>
+            <option>Водка</option>
+            <option>Виски</option>
+            <option>Белое вино</option>
+            <option>Красное вино</option>
+            <option>Шампанское</option>
+            <option>Настойка</option>
+            <option>Не пью алкоголь</option>
+            <option value="other">Другое (напишу сам)</option>
+          </select>
+          <input type="text" id="drinkOther" name="drinkOther" placeholder="Напишите, что предпочитаете" maxlength="80" hidden>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="comment">Пожелание или песня для танцпола</label>
+        <textarea id="comment" name="comment" maxlength="500" placeholder="По желанию"></textarea>
+      </div>
+
+      <div class="hp" aria-hidden="true"><label for="website">Не заполняйте</label><input type="text" id="website" name="website" tabindex="-1" autocomplete="off"></div>
+
+      <p class="err" id="err" role="alert" hidden></p>
+      <button class="btn" type="submit" id="submit">Отправить ответ</button>
+    </form>
+
+    <div class="thanks" id="thanks" hidden>
+      <h3 id="thanksTitle">Спасибо!</h3>
+      <p id="thanksText">Ваш ответ уже у меня. Жду вас, будет здорово!</p>
+      <div class="hand gold-text" data-f="signature">Ваша Аня</div>
+      <button class="btn ghost" type="button" id="again">Ответить за ещё одного гостя</button>
+    </div>
+  </section>
+
+  <!-- ===== КАРТА ===== -->
+  <section class="rv" id="map">
+    <p class="rubric">Как добраться</p>
+    <h2>Кафе <span data-f="placeShort">«Ани»</span></h2>
+    <p class="muted" data-f="address">г. Фокино, ул. Дальняя, 2</p>
+    <a class="map-frame" id="mapLink" href="#" target="_blank" rel="noopener" aria-label="Открыть кафе на Яндекс.Картах">
+      <iframe id="mapFrame" title="Карта: кафе «Ани»" loading="lazy" tabindex="-1"></iframe>
+      <span class="map-pin" aria-hidden="true"></span>
+    </a>
+    <a class="btn ghost" id="mapBtn2" href="#" target="_blank" rel="noopener" style="margin-top:14px">Открыть в Яндекс.Картах</a>
+  </section>
+
+  <footer class="rv">
+    <p class="hand gold-text">До встречи!</p>
+    <p class="muted">Вопросы можно задать по телефону<br><a id="phoneLink" href="tel:89242427615" data-f="phone" style="color:var(--cream);font-weight:800;font-size:20px;text-decoration:none;border-bottom:1px solid var(--line)">8-924-242-76-15</a></p>
+    <div class="imprint">
+      Главный редактор: <b data-f="editor">любимая дочь Ксюша</b><br>
+      Тираж: только самые близкие · Выход номера: <span data-f="dateShort">21·11·2026</span><br>
+      Перепечатка улыбок разрешена
+    </div>
+  </footer>
+</div>
+
+<script>
+/* =====================================================================
+   НАСТРОЙКИ — всё, что нужно поменять, находится здесь
+   ===================================================================== */
+const CONFIG = {
+  name: "Анна",                         // имя мамы (на обложке)
+  signature: "Ваша Аня",                // подпись под письмом
+  date: "2026-11-21T16:00:00+10:00",     // дата и время праздника (+10:00 — время Приморья; для Брянской обл. +03:00)
+  timeZone: "Asia/Vladivostok",          // для Брянской обл.: "Europe/Moscow"
+  durationHours: 5,                      // длительность (для календаря)
+  place: "Кафе «Ани»",
+  address: "г. Фокино, ул. Дальняя, 2",
+  mapUrl: "https://yandex.ru/maps/org/ani/162841737823/", // кафе на Яндекс.Картах
+  mapPoint: [132.406035, 42.985943],     // координаты метки на мини-карте (долгота, широта)
+  dress: "Всё, в чём вы чувствуете себя звездой обложки",
+  phone: "8-924-242-76-15",
+  editor: "любимая дочь Ксюша",          // подпись «Главный редактор» внизу страницы
+  // Адрес веб-приложения Google Apps Script (см. ИНСТРУКЦИЯ.md).
+  // Пока пусто — форма работает в демо-режиме и никуда не отправляет.
+  scriptUrl: "https://script.google.com/macros/s/AKfycbzswgUGAG4GaDb-K4196IsJjj2Mluhnfp3FZAUpERY2EQubB9QPCac4ou2SKDu8tOWA/exec"
+};
+/* ===================================================================== */
+
+document.documentElement.classList.add("js");
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+// --- Заполняем страницу из настроек
+const when = new Date(CONFIG.date);
+const fmt = (o) => new Intl.DateTimeFormat("ru-RU", { timeZone: CONFIG.timeZone, ...o }).format(when);
+const parts = {
+  name: CONFIG.name, signature: CONFIG.signature,
+  day: fmt({ day: "numeric" }),
+  month: fmt({ day: "numeric", month: "long" }).replace(/^\d+\s/, ""),
+  weekday: fmt({ weekday: "long" }),
+  time: fmt({ hour: "2-digit", minute: "2-digit" }),
+  monthYear: fmt({ month: "long", year: "numeric" }).replace(" г.", ""),
+  dateShort: fmt({ day: "2-digit", month: "2-digit", year: "numeric" }).replace(/\./g, "·"),
+  placeShort: CONFIG.place.replace(/^Кафе\s*/i, ""),
+  place: CONFIG.place, address: CONFIG.address, dress: CONFIG.dress,
+  phone: CONFIG.phone, editor: CONFIG.editor
+};
+$$("[data-f]").forEach(el => { const v = parts[el.dataset.f]; if (v) el.textContent = v; });
+
+// --- Шапка-логотип: подгоняем размер под ширину и анимируем буквы
+const mast = $("#mast"), coverPhoto = $("#coverPhoto");
+function fitMast() {
+  const w = mast.parentElement.clientWidth;
+  mast.style.fontSize = "100px";
+  const size = Math.min(150, Math.max(48, 100 * w / mast.scrollWidth * 0.98));
+  mast.style.fontSize = size + "px";
+  coverPhoto.style.fontSize = size + "px";
+}
+mast.setAttribute("aria-label", CONFIG.name);
+mast.innerHTML = [...CONFIG.name].map((c, i) =>
+  `<span class="ch" aria-hidden="true" style="animation-delay:${0.08 * i}s">${c === " " ? "&nbsp;" : c}</span>`).join("");
+fitMast();
+document.fonts && document.fonts.ready.then(fitMast);
+addEventListener("resize", fitMast);
+
+// --- Карта и календарь
+$("#phoneLink").href = "tel:" + CONFIG.phone.replace(/[^\d+]/g, "");
+$("#mapBtn").href = CONFIG.mapUrl || "https://yandex.ru/maps/?text=" + encodeURIComponent(CONFIG.address);
+$("#mapBtn2").href = $("#mapLink").href = $("#mapBtn").href;
+{ const [lon, lat] = CONFIG.mapPoint;
+  $("#mapFrame").src = `https://yandex.ru/map-widget/v1/?ll=${lon},${lat}&z=16`; }
+const end = new Date(when.getTime() + CONFIG.durationHours * 3600e3);
+const utc = d => d.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
+const title = `Юбилей: ${CONFIG.name} — 50!`;
+const isApple = /iPhone|iPad|iPod|Macintosh/.test(navigator.userAgent) && "ontouchend" in document;
+if (isApple) {
+  const ics = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//yubiley//RU", "BEGIN:VEVENT",
+    "UID:" + utc(when) + "@yubiley", "DTSTAMP:" + utc(new Date()), "DTSTART:" + utc(when), "DTEND:" + utc(end),
+    "SUMMARY:" + title, "LOCATION:" + CONFIG.place + ", " + CONFIG.address,
+    "BEGIN:VALARM", "TRIGGER:-P1D", "ACTION:DISPLAY", "DESCRIPTION:" + title, "END:VALARM",
+    "END:VEVENT", "END:VCALENDAR"].join("\r\n");
+  const cal = $("#calBtn");
+  cal.href = "data:text/calendar;charset=utf-8," + encodeURIComponent(ics);
+  cal.setAttribute("download", "yubiley.ics");
+  cal.removeAttribute("target");
+} else {
+  $("#calBtn").href = "https://calendar.google.com/calendar/render?action=TEMPLATE" +
+    "&text=" + encodeURIComponent(title) + "&dates=" + utc(when) + "/" + utc(end) +
+    "&location=" + encodeURIComponent(CONFIG.place + ", " + CONFIG.address);
+}
+
+// --- Обратный отсчёт
+const pad = n => String(n).padStart(2, "0");
+function tick() {
+  let s = Math.max(0, Math.floor((when - Date.now()) / 1000));
+  if (s === 0) { $("#cdLabel").textContent = "Номер уже вышел!"; }
+  $("#cdD").textContent = pad(Math.floor(s / 86400)); s %= 86400;
+  $("#cdH").textContent = pad(Math.floor(s / 3600)); s %= 3600;
+  $("#cdM").textContent = pad(Math.floor(s / 60));
+  $("#cdS").textContent = pad(s % 60);
+}
+tick(); setInterval(tick, 1000);
+
+// --- Появление разделов при прокрутке (то, что уже на экране, видно сразу)
+if ("IntersectionObserver" in window && !reduce) {
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.remove("wait"); io.unobserve(e.target); }
+  }), { threshold: 0.12 });
+  $$(".rv").forEach(el => {
+    if (el.getBoundingClientRect().top > innerHeight) { el.classList.add("wait"); io.observe(el); }
+  });
+}
+
+// --- Анкета
+const form = $("#form"), onlyYes = $("#onlyYes"), drink = $("#drink"), other = $("#drinkOther");
+const err = $("#err"), out = $("#guests");
+let guests = 1;
+const att = () => (form.querySelector("[name=attending]:checked") || {}).value;
+
+form.addEventListener("change", e => {
+  if (e.target.name === "attending") onlyYes.hidden = att() !== "yes";
+  if (e.target === drink) {
+    other.hidden = drink.value !== "other";
+    if (!other.hidden) { other.classList.add("reveal-other"); other.focus(); }
+  }
+  err.hidden = true;
+});
+// браузер может восстановить ответы после перезагрузки: показываем нужные поля
+function syncForm() { onlyYes.hidden = att() !== "yes"; other.hidden = drink.value !== "other"; }
+syncForm(); addEventListener("pageshow", syncForm);
+$("#minus").onclick = () => { guests = Math.max(1, guests - 1); out.textContent = guests; };
+$("#plus").onclick = () => { guests = Math.min(10, guests + 1); out.textContent = guests; };
+
+function fail(msg, el) { err.textContent = msg; err.hidden = false; el && el.focus(); }
+
+form.addEventListener("submit", async e => {
+  e.preventDefault();
+  const name = $("#name").value.trim();
+  if (!name) return fail("Напишите, пожалуйста, ваше имя.", $("#name"));
+  if (!att()) return fail("Отметьте, придёте ли вы.", $("#att-yes"));
+  let drinkVal = "";
+  if (att() === "yes") {
+    drinkVal = drink.value === "other" ? other.value.trim() : drink.value;
+    if (!drink.value) return fail("Выберите напиток из списка.", drink);
+    if (drink.value === "other" && !drinkVal) return fail("Напишите, что вы предпочитаете.", other);
+  }
+  const data = {
+    name, attending: att(), guests: att() === "yes" ? guests : 0,
+    drink: drinkVal, drinkOther: drink.value === "other" ? "да" : "",
+    comment: $("#comment").value.trim(), website: $("#website").value
+  };
+  const btn = $("#submit");
+  btn.disabled = true; btn.textContent = "Отправляю…";
+  try {
+    if (CONFIG.scriptUrl) {
+      await fetch(CONFIG.scriptUrl, { method: "POST", mode: "no-cors", body: new URLSearchParams(data) });
+    } else {
+      console.info("Демо-режим: ответ не отправлен, укажите CONFIG.scriptUrl", data);
+      await new Promise(r => setTimeout(r, 600));
+    }
+    showThanks(data);
+  } catch (x) {
+    fail("Не получилось отправить. Проверьте интернет и попробуйте ещё раз.");
+  } finally {
+    btn.disabled = false; btn.textContent = "Отправить ответ";
+  }
+});
+
+function showThanks(d) {
+  const first = d.name.split(/\s+/)[0];
+  if (d.attending === "yes") {
+    $("#thanksTitle").textContent = `${first}, ура!`;
+    $("#thanksText").textContent = "Ваш ответ уже у меня. Обнимаю и жду вас на празднике!";
+    confetti();
+  } else {
+    $("#thanksTitle").textContent = `${first}, спасибо!`;
+    $("#thanksText").textContent = "Жаль, что не получится. Я обязательно подниму бокал за вас!";
+  }
+  form.hidden = true; $("#thanks").hidden = false;
+  $("#rsvp").scrollIntoView({ behavior: reduce ? "auto" : "smooth" });
+}
+$("#again").onclick = () => {
+  form.reset(); guests = 1; out.textContent = 1; onlyYes.hidden = true; other.hidden = true;
+  $("#thanks").hidden = true; form.hidden = false; $("#name").focus();
+};
+
+// --- Конфетти
+function confetti() {
+  if (reduce) return;
+  const c = $("#confetti"), x = c.getContext("2d"), dpr = devicePixelRatio || 1;
+  c.width = innerWidth * dpr; c.height = innerHeight * dpr; x.scale(dpr, dpr);
+  const cols = ["#F7E1A3", "#D8AE5C", "#FF6F97", "#F6C6D3", "#F8ECDA"];
+  const ps = Array.from({ length: 160 }, () => ({
+    x: innerWidth / 2, y: innerHeight * 0.55,
+    vx: (Math.random() - .5) * 14, vy: -Math.random() * 16 - 6,
+    w: 6 + Math.random() * 6, h: 8 + Math.random() * 10,
+    r: Math.random() * 6, vr: (Math.random() - .5) * .3,
+    c: cols[Math.random() * cols.length | 0]
+  }));
+  const t0 = performance.now();
+  (function frame(t) {
+    x.clearRect(0, 0, innerWidth, innerHeight);
+    ps.forEach(p => {
+      p.vy += .38; p.vx *= .99; p.x += p.vx; p.y += p.vy; p.r += p.vr;
+      x.save(); x.translate(p.x, p.y); x.rotate(p.r); x.fillStyle = p.c;
+      x.fillRect(-p.w / 2, -p.h / 2, p.w, p.h * Math.abs(Math.cos(p.r * 2))); x.restore();
+    });
+    if (t - t0 < 4000) requestAnimationFrame(frame); else x.clearRect(0, 0, innerWidth, innerHeight);
+  })(t0);
+}
+</script>
+</body>
+</html>
